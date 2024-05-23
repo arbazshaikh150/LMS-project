@@ -22,3 +22,15 @@ Making index.css as the root css file (yaha par tailwind directives daal do !!)
 npm install @reduxjs/toolkit react-redux react-router-dom react-icons react-chartjs-2 chart.js daisyui axios react-hot-toast @tailwindcss/line-clamp
 ```
 
+### configure auto import sort eslint
+1) Installation (simple-import-sort)
+2) Add rule in `eslint.cjs`
+```
+    'simple-import-sort/imports' : 'error',
+```
+3) Update the auto save error fix from the settings
+(Setting --> setting.json --> (add extra rules))
+
+
+
+
