@@ -5,11 +5,24 @@
 // Feather (fi) , AntDesign (ai)
 import {FiMenu} from 'react-icons/fi'
 import {AiFillCloseCircle} from 'react-icons/ai'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Footer from '../Components/Footer';
+import { useDispatch, useSelector } from 'react-redux';
 
 // text-base-content (font-size 1 rem and line-height)
 function HomeLayout({children}){
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    // For checking if user is logged in or not
+
+    // auth slice main hamne select karke rkha tha
+    const isLoggedIn = useSelector((state) => state ?.auth ?. isLoggedIn);
+
+    // For displaying the options
+    // State mai se lekar aayenge
+    const role = useSelector((state) => state ?.auth ?. role);
+
 
     // Changing the width (jaha par actual content hota hai usko hi toggle kar rhe hia)
     function changeWidth(){
@@ -29,6 +42,16 @@ function HomeLayout({children}){
 
         // Auto kar diye toh yeh w-fit ki tarah kaam karega
         drawerSide[0].style.width = '0px';
+    }
+
+    async function handleLogout(e){
+        e.preventDefault();
+        // Auth slice se milega
+        // Jab reducers banenge tab yaha par hoga 
+        // const res = await dispatch(logout());
+        // Waha bhej rhe hai
+        // if(res?.payload?.success)
+        navigate("/");
     }
 
     return(
@@ -61,6 +84,13 @@ function HomeLayout({children}){
                             Home
                             </Link>
                         </li>
+
+                        {isLoggedIn && role === 'ADMIN' && (
+                          <li>
+                            <Link to='/admin/dashboard'>Admin Dashboard</Link>
+                          </li>  
+                        ) }
+
                         <li>
                             <Link to="/courses"  > 
                             All Courses
@@ -78,6 +108,31 @@ function HomeLayout({children}){
                             About Us
                             </Link>
                         </li>
+
+                        {!isLoggedIn && (
+                            <li className="relative">
+                            <div className="w-full flex items-center justify-center">
+                                <button className='btn btn-primary px-6 py-1 font-semibold rounded-md w-fit'>
+                                    <Link to='/login'>Login</Link>
+                                </button>
+                                <button className='btn btn-secondary px-6 py-1 font-semibold rounded-md w-fit'>
+                                    <Link to='/signup'>Signup</Link>
+                                </button>
+                            </div>
+                            </li>
+                        )}
+                        {isLoggedIn && (
+                            <li className="relative">
+                            <div className="w-full flex items-center justify-center">
+                                <button className='btn-primary px-6 py-1 font-semibold rounded-md w-full'>
+                                    <Link to='/user/profile'>Profile</Link>
+                                </button>
+                                <button className='btn-secondary px-6 py-1 font-semibold rounded-md w-full'>
+                                    <Link onClick={handleLogout}>Logout</Link>
+                                </button>
+                            </div>
+                            </li>
+                        )}
                     </ul>
                 </div>
             </div>
