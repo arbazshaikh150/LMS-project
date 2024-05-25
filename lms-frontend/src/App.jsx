@@ -3,6 +3,7 @@ import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import HomePage from './Pages/HomePage'
 import AboutUs from './Pages/AboutUs'
+import NotFound from './Pages/NotFound'
 
 //////// React.dev
 
@@ -24,6 +25,10 @@ function App() {
         {/* Individual routes */}
         <Route path='/' element={<HomePage/>}></Route>
         <Route path='/about' element={<AboutUs/>}></Route>
+
+
+        {/* Unknown route */}
+        <Route path='*' element={<NotFound/>}></Route>
 
       </Routes>
     </>
