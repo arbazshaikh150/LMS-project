@@ -8,6 +8,7 @@ import {AiFillCloseCircle} from 'react-icons/ai'
 import { Link, useNavigate } from 'react-router-dom';
 import Footer from '../Components/Footer';
 import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../Redux/Slices/AuthSlice';
 
 // text-base-content (font-size 1 rem and line-height)
 function HomeLayout({children}){
@@ -48,9 +49,9 @@ function HomeLayout({children}){
         e.preventDefault();
         // Auth slice se milega
         // Jab reducers banenge tab yaha par hoga 
-        // const res = await dispatch(logout());
+        const res = await dispatch(logout());
         // Waha bhej rhe hai
-        // if(res?.payload?.success)
+        if(res?.payload?.success)
         navigate("/");
     }
 
