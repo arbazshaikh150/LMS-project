@@ -11,6 +11,10 @@ import errorMiddleware from './middlewares/error.middleware.js';
 // joh bhi request mai body aati hai woh parse hokar chale jaye
 app.use(express.json());
 
+// Middleware 
+// Encoded url mai se query param nikalne mai aasani hoti hai
+app.use(express.urlencoded({extended : true}))
+
 app.use(cors({
     origin : [process.env.FRONTEND_URL],
     credentials : true

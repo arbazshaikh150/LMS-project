@@ -1,6 +1,7 @@
 import { Schema , model } from "mongoose";
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import crypto from 'crypto'
 
 // Schema (Mast schema haii op)
 const userSchema = new Schema({
@@ -80,8 +81,26 @@ userSchema.methods = {
     comparePassword : async function (plainTextPassword){
         // Plain text ko database ke password se compare karna hai
         return await bcrypt.compare(plainTextPassword , this.password);
-    }
+    },
+    generatePasswordResetToken : async function (){
+        // Token using crypto
+        // Randomly taking the bits
+        const resetToken = crypto.randomBytes(20).toString('hex')
+
+
+        this.forgotPasswordToken = crypto
+        .createHash('sha256')
+        .update(resetToken)
+        .digest('hex');
+
+        // 15 minute from now
+        this.forgotPasswordExpiry = Date.now() + 15 * 60 *1000;
+    },
 }
+
+// Fr forget password
+
+
 
 // Model connection
 const User = model("User" , userSchema);
