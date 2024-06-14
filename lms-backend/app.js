@@ -7,7 +7,7 @@ const app = express();
 // {} matlab named export , bina uske means default exports
 import userRoutes from './routes/userRoutes.js'
 import errorMiddleware from './middlewares/error.middleware.js';
-
+import courseRoute from './routes/course.routes.js'
 // joh bhi request mai body aati hai woh parse hokar chale jaye
 app.use(express.json());
 
@@ -41,6 +41,9 @@ app.use('/ping' , function(req , res){
 // 3 modules rooutes
 app.use('/api/vi/user' , userRoutes);
 
+
+//  For course related routes
+app.use('/api/v1/courses' , courseRoute)
 
 
 // other than all routes
