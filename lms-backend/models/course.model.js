@@ -22,14 +22,9 @@ const courseSchema = new Schema({
 
     },
     thumbnail : {
-        public_id : {
-            type : String,
-            required : true,
-        },
-        secure_url : {
-            type : String,
-            required : true,
-        }
+        //  Required is try dikkat de rha tha issliye isse aisse dummy banakar rkhe!!!
+        public_id : 'Dummy',
+        secure_url : 'Dummy'
     },
     lectures : [
         // We have list of lectures
