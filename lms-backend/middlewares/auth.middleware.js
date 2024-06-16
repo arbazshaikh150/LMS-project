@@ -33,7 +33,18 @@ const authorizedRole = (...roles) => async (req , res , next) => {
     next();
 }
 
+const authorizedSubscriber = async (req , res , next) => {
+    const subscription = req.user.subscription;
+    const currentUserRoles = req.user.role;
+
+    if(currentUserRoles !== 'ADMIN' && subscription.status !== 'active'){
+        return next(new AppError('Not Permission Allowed' , 403));
+    }
+    next();
+}
+
 export {
     isLoggedIn,
-    authorizedRole
+    authorizedRole,
+    authorizedSubscriber
 }

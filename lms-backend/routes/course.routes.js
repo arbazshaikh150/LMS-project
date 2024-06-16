@@ -1,6 +1,6 @@
 import {Router} from 'express';
 import { addLectureByPostId, createCourse, getAllCourses, getLecturesByCourseId, removeCourse, updateCourse } from '../controllers/course.controller.js';
-import { authorizedRole, isLoggedIn } from '../middlewares/auth.middleware.js';
+import { authorizedRole, authorizedSubscriber, isLoggedIn } from '../middlewares/auth.middleware.js';
 import upload from '../middlewares/multer.middleware.js'
 // .js error !!! 
 const router = new Router();
@@ -28,7 +28,7 @@ router.route('/')
 
 //  Creation and updation , deletion admin hi kar sakte hai
 router.route('/:id')
-.get( isLoggedIn ,getLecturesByCourseId)
+.get( isLoggedIn , authorizedSubscriber ,getLecturesByCourseId)
 .put(isLoggedIn ,
     // Ham multiple roles bhi send kar sakte hai!!
     authorizedRole('ADMIN'),

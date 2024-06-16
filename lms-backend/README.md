@@ -31,3 +31,15 @@ a) Email --> Validate in database -> Generate new token -> send email with new u
 
 Part 2:
 Verify the token in database , (url query param) --> update password in database (sab encrypt karke karenge.)
+
+### RazorPay
+Subscribe to the course.
+RazorPay Op!!!! (1 /- Op).
+Payment Methods:
+User : Subscribe ,
+Admin : View , Update (Payment Details).
+
+
+`End Points`
+/razorpay-key --> Gives To client
+/subscribe (subscription url) ---> Payment GateWay ---> Verify (Payment ho gya hia ky n all)

@@ -46,6 +46,12 @@ const userSchema = new Schema({
     forgotPasswordToken : String,
     forgotPasswordExpiry : Date,
 
+    // Baad main add kiye hia , for payment model
+    subscription : {
+        id : String,
+        status : String
+    }
+
 }, {
     // By default hote rhe
     timestamps : true

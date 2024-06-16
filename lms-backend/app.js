@@ -8,6 +8,7 @@ const app = express();
 import userRoutes from './routes/userRoutes.js'
 import errorMiddleware from './middlewares/error.middleware.js';
 import courseRoute from './routes/course.routes.js'
+import paymentRoute from './routes/payment.routes.js'
 // joh bhi request mai body aati hai woh parse hokar chale jaye
 app.use(express.json());
 
@@ -44,6 +45,10 @@ app.use('/api/vi/user' , userRoutes);
 
 //  For course related routes
 app.use('/api/v1/courses' , courseRoute)
+
+
+//  Adding Payment Path
+app.use('/api/v1/payments' , paymentRoute)
 
 
 // other than all routes
