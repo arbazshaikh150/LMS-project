@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {toast} from 'react-hot-toast'
 import { createAccount } from "../Redux/Slices/AuthSlice";
+import { isEmail, isValidPassword } from "../Helpers/regexMatcher";
 
 // Bina kuch karke submit kar rha hu toh toast nhi aa rha hai , email khud validate karta hai usse hatane ke liye no-validate attribute use karna pada
 
@@ -83,13 +84,13 @@ function SignUp(){
         }
         // Email ki regex validation javascript
         // Google op
-        if(!signupData.email.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
+        if(!isEmail(signupData.email)){
             toast.error("Invalid Email Id");
             return;
         }
 
         // Checking password validation
-        if(!signupData.password.match(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)){
+        if(!isValidPassword(signupData.password)){
             toast.error("Password should be 6 - 16 character long with atleast a number and special character");
             return;
         }
